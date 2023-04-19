@@ -4,6 +4,8 @@ import com.changeun.bssm.hellospring.domain.Student;
 import com.changeun.bssm.hellospring.repository.MemoryStudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService {
     private final MemoryStudentRepository repository;
@@ -25,5 +27,20 @@ public class StudentService {
         if(repository.findById(student.getId()) != null) {
             throw new IllegalStateException("already exist");
         }
+    }
+
+    public List<Student> findStudents() {
+        return repository.findAll();
+    }
+
+    public Student findById(Long id) {
+        return repository.findById(id);
+    }
+
+    public void updateStudent(Student updateStudent) {
+        // 1. store에서 student 찾아옴
+        Student student = repository.findById(updateStudent.getId());
+
+        student.setScore(updateStudent.getScore());
     }
 }

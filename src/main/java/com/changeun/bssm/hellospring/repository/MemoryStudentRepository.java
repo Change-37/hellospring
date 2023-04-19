@@ -20,4 +20,10 @@ public class MemoryStudentRepository implements StudentRepository {
     public Student findById(Long id) {
         return store.get(id);
     }
+
+    @Override
+    public List<Student> findAll() {
+        List<Student> list = new ArrayList<>(store.values());
+        return list;
+    }
 }
